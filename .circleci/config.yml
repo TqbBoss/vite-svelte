@@ -38,5 +38,6 @@ workflows:
               only:
                 - main
       - deploy:
-          requires: build
+          requires: 
+            - build
      
