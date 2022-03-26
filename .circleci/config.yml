@@ -1,17 +1,42 @@
 version: 2.1
+orbs:
+  node: circleci/node@5.0.1
+
 jobs:
   build:
     docker:
-      - image: alpine:3.7
+      - image: cimg/node:17.2.0
     steps:
+      - run: echo "====================开始构建========================"
       - checkout
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
-          name: The First Step
+          name: Build vite-svelte app
+          command: yarn build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+  deploy:
+    machine:
+      - image: ubuntu-2004:202111-02
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run: 
+          name: deploy build to nginx
           command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
-      - run:
-          name: Code Has Arrived
-          command: |
-            ls -al
-            echo '^^^That should look familiar^^^'
+            rsync -avz --delete --port 873 build/ 124.71.227.249::test/
+
+workflows:
+  on_main_push:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+      - deploy:
+          requires: build
+     
