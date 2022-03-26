@@ -23,10 +23,11 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
+      - run: echo $RSYNC_SECRET
       - run: 
           name: deploy dist to nginx
           command: |
-            rsync -avz --delete --port 873 ./dist/ 124.71.227.249::test/
+            rsync -avz --delete --port 873 ./dist/ 124.71.227.249::web/
 
 workflows:
   on_main_push:
