@@ -30,7 +30,7 @@ jobs:
       - run: 
           name: deploy To nginx
           command: |
-            rsync -avz --delete --port 873 --password-file=rsyncd.secret ./dist/ 124.71.227.249::nginx/
+            rsync -avz --delete --port 873 --password-file=rsyncd.secret ./dist/ root@124.71.227.249::nginx/
 
 workflows:
   on_main_push:
