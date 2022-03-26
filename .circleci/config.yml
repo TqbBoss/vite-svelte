@@ -7,7 +7,6 @@ jobs:
     docker:
       - image: cimg/node:17.2.0
     steps:
-      - run: echo "====================开始构建========================"
       - checkout
       - node/install-packages:
           pkg-manager: yarn
@@ -25,9 +24,9 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run: 
-          name: deploy build to nginx
+          name: deploy dist to nginx
           command: |
-            rsync -avz --delete --port 873 build/ 124.71.227.249::test/
+            rsync -avz --delete --port 873 ./dist/ 124.71.227.249::test/
 
 workflows:
   on_main_push:
