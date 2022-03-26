@@ -24,13 +24,13 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run: |
-          sudo "$RSYNC_SECRET" > /etc/rsyncd.secret &&
-          sudo cat /etc/rsyncd.secret &&
-          sudo chmod 600 /etc/rsyncd.secret
+          sudo "$RSYNC_SECRET" > rsyncd.secret &&
+          sudo cat rsyncd.secret &&
+          sudo chmod 600 rsyncd.secret
       - run: 
           name: deploy To nginx
           command: |
-            rsync -avz --delete --port 873 --password-file=/etc/rsyncd.secret ./dist/ 124.71.227.249::nginx/
+            rsync -avz --delete --port 873 --password-file=rsyncd.secret ./dist/ 124.71.227.249::nginx/
 
 workflows:
   on_main_push:
