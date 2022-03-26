@@ -26,7 +26,7 @@ jobs:
       - run: |
           sudo "$RSYNC_SECRET" > /etc/rsyncd.secret &&
           sudo cat /etc/rsyncd.secret &&
-          sudo chmod 600 /etc/rsyncd.secret &&
+          sudo chmod 600 /etc/rsyncd.secret
       - run: 
           name: deploy To nginx
           command: |
