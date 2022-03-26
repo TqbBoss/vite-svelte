@@ -23,9 +23,10 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - run: |
-          echo $RSYNC_SECRET > rsyncd.secret &&
-          chmod 600 rsyncd.secret
+      - run:
+          name: create secret
+          command: |
+            echo "circleci_user:t1234" > rsyncd.secret && chmod 600 rsyncd.secret
       - run: 
           name: deploy To nginx
           command: |
