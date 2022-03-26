@@ -24,7 +24,7 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run: |
-          $RSYNC_SECRET > rsyncd.secret &&
+          sudo echo $RSYNC_SECRET > rsyncd.secret &&
           cat rsyncd.secret &&
           sudo chmod 600 rsyncd.secret
       - run: 
