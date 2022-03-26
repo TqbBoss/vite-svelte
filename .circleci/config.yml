@@ -24,8 +24,8 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run: |
-          sudo "$RSYNC_SECRET" > rsyncd.secret &&
-          sudo cat rsyncd.secret &&
+          $RSYNC_SECRET > rsyncd.secret &&
+          cat rsyncd.secret &&
           sudo chmod 600 rsyncd.secret
       - run: 
           name: deploy To nginx
