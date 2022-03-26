@@ -26,7 +26,7 @@ jobs:
       - run:
           name: create secret
           command: |
-            echo "circleci_user:t1234" > rsyncd.secret && chmod 600 rsyncd.secret
+            echo "t1234" > rsyncd.secret && chmod 600 rsyncd.secret
       - run:
           cat rsyncd.secret
       - run: 
