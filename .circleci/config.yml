@@ -26,11 +26,11 @@ jobs:
       - run: 
           name: create rsyncd.secret
           command: |
-            $RSYNC_SECRET > /etc/rsyncd.secret
+            sudo $RSYNC_SECRET > /etc/rsyncd.secret
       - run: 
           name: chmod rsyncd.secret
           command: |
-            chmod 600 /etc/rsyncd.secrets
+            sudo chmod 600 /etc/rsyncd.secrets
       - run: 
           name: print secrets
           command: |
